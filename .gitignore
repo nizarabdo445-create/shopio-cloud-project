@@ -1,0 +1,32 @@
+# Environment & Secrets
+.env
+
+# Uploaded images (Future uploads)
+# Current seeded images in client/img/ are kept.
+client/img/uploads/
+
+# Legacy assets
+img/
+
+# Logs
+*.log
+logs/
+
+# Temporary tests
+test_*.js
+test*.js
+dummy*
+persistence_*.jpg
+persistence_id.txt
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies
+vendor/
+node_modules/
