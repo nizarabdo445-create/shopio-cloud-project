@@ -1,6 +1,5 @@
-version: '3.8'
-
 services:
+
   init-img-data:
     image: alpine:latest
     container_name: init_img_data
@@ -11,9 +10,7 @@ services:
       - app-network
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: nizarabdo/ecommerce-backend:v1.0.0
     container_name: backend_api
     restart: unless-stopped
     depends_on:
@@ -22,7 +19,6 @@ services:
     networks:
       - app-network
     volumes:
-      # Mount images to backend so PHP can upload/manipulate them if needed
       - img-data:/var/www/html/img
     env_file:
       - .env
@@ -36,11 +32,8 @@ services:
     networks:
       - app-network
     volumes:
-      # Nginx config
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # Frontend Client Files
       - ./client:/usr/share/nginx/html:ro
-      # Shared Image Volume
       - img-data:/var/www/img:ro
     depends_on:
       - backend
@@ -55,17 +48,18 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
     volumes:
-      # Persistent Database Data
       - db-data:/var/lib/mysql
-      # Initialization Script (Will run only if database is empty)
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
 
 networks:
   app-network:
     driver: bridge
 
+
 volumes:
   db-data:
     name: project_db_data
+
   img-data:
     name: project_img_data
