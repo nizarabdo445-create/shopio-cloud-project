@@ -16,6 +16,8 @@ services:
     depends_on:
       init-img-data:
         condition: service_completed_successfully
+      database:
+        condition: service_healthy
     networks:
       - app-network
     volumes:
@@ -42,7 +44,8 @@ services:
       - ./client:/usr/share/nginx/html:ro
       - img-data:/var/www/img:ro
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1/login.html || exit 1" ]
       interval: 10s
