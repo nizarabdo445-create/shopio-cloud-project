@@ -421,17 +421,50 @@ legacy/
 
 ---
 
-# Docker Image
+# Docker Registry
 
+The Shopio backend image is published on Docker Hub.
 
-الصورة الحالية:
+## Image
 
+`nizarabdo/ecommerce-backend`
 
-nizarabdo/ecommerce-backend:v1.0.0
+## Available Tags
 
+- `v1.0.0` — Versioned release
+- `latest` — Latest stable release
 
+## Pull from Docker Hub
 
----
+Pull the versioned release:
+
+`docker pull nizarabdo/ecommerce-backend:v1.0.0`
+
+Or pull the latest stable release:
+
+`docker pull nizarabdo/ecommerce-backend:latest`
+
+## Run the Complete Application
+
+The backend image is used by `docker-compose.yml`. To start the complete Shopio stack:
+
+`docker compose up -d`
+
+Verify the running services:
+
+`docker compose ps`
+
+The application is available through the Nginx reverse proxy at:
+
+`http://localhost`
+
+The backend and database are not published directly to the host.
+
+## Registry Verification
+
+The `v1.0.0` image was successfully removed locally, pulled again from Docker Hub, and used to start the complete application.
+
+Database data remained persistent through the named volume after the containers were recreated.
 
 # الخلاصة
 
