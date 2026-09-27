@@ -350,26 +350,82 @@ project_img_data
 
 # تشغيل المشروع
 
+## المتطلبات
 
-بعد تثبيت Docker:
+يجب تثبيت:
 
+- Docker
+- Docker Compose
+- Git
 
-تشغيل النظام:
+## 1. استنساخ المشروع
+
+```bash
+git clone https://github.com/nizarabdo445-create/shopio-cloud-project.git
+cd shopio-cloud-project
+```
+
+## 2. إعداد متغيرات البيئة
+
+أنشئ ملف `.env` من ملف المثال:
+
+### Windows PowerShell
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### Linux / macOS
+
+```bash
+cp .env.example .env
+```
+
+بعد ذلك افتح `.env` وغيّر القيم الافتراضية قبل التشغيل.
+
+المتغيرات الرئيسية:
+
+- `DB_HOST=database` — اسم خدمة قاعدة البيانات داخل شبكة Docker.
+- `DB_PORT=3306` — منفذ MariaDB الداخلي.
+- `DB_DATABASE=project` — اسم قاعدة البيانات.
+- `DB_USERNAME=app_user` — مستخدم قاعدة البيانات الخاص بالتطبيق.
+- `DB_PASSWORD` — كلمة مرور مستخدم التطبيق.
+- `DB_ROOT_PASSWORD` — كلمة مرور مستخدم MariaDB root، ويجب أن تكون مختلفة عن كلمة مرور التطبيق.
+- `JWT_SECRET` — مفتاح سري للمصادقة ويجب استبدال القيمة الافتراضية بقيمة قوية وعشوائية.
+- `JWT_EXPIRY=3600` — مدة صلاحية JWT.
+
+> ملف `.env` يحتوي بيانات حساسة وهو مستبعد من Git. لا تقم برفعه إلى المستودع. يتم رفع `.env.example` فقط بدون أسرار حقيقية.
+
+## 3. تشغيل النظام
+
+```bash
 docker compose up -d
+```
 
+## 4. التحقق من حالة الخدمات
 
-
-عرض حالة الحاويات:
+```bash
 docker compose ps
+```
 
+يجب أن تعمل الخدمات الأساسية بنجاح:
 
+- `database_mysql`
+- `backend_api`
+- `proxy_client`
 
-إيقاف النظام:
+ويتم الوصول إلى التطبيق من خلال Nginx فقط على المنفذ `80`.
+
+## 5. إيقاف النظام
+
+```bash
 docker compose down
+```
 
-
+البيانات والصور محفوظة في Docker named volumes، لذلك لا يؤدي `docker compose down` العادي إلى حذف البيانات.
 
 ---
+
 
 # الوصول للنظام
 
