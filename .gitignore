@@ -2,11 +2,12 @@
 .env
 
 # Uploaded images (Future uploads)
-# Current seeded images in client/img/ are kept.
+# Runtime uploads inside client assets
 client/img/uploads/
 
-# Legacy assets
-img/
+# Seed product images in img/ are tracked by Git
+
+
 
 # Logs
 *.log

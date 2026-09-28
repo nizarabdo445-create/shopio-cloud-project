@@ -5,7 +5,12 @@ services:
     container_name: init_img_data
     volumes:
       - img-data:/var/www/html/img
-    command: chown -R 82:82 /var/www/html/img
+      - ./img:/seed-img:ro
+    command: >
+      sh -c "
+        cp -n /seed-img/* /var/www/html/img/ 2>/dev/null || true;
+        chown -R 82:82 /var/www/html/img
+      "
     networks:
       - app-network
 

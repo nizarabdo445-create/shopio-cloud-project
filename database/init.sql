@@ -66,7 +66,22 @@ CREATE TABLE `prod` (
 
 LOCK TABLES `prod` WRITE;
 /*!40000 ALTER TABLE `prod` DISABLE KEYS */;
-INSERT INTO `prod` VALUES (57,'Iphone-16','5000','img/iphone 16.jpeg'),(58,'Xiaomi Redmi Note 12 ','1100','img/Xiaomi Redmi Note 12 Explorer.jpeg'),(61,'Iphone-16','500$','img/╪ش┘ê╪د┘╪د╪ز ╪ز╪»╪╣┘à CDMa ┘┘è ╪د┘┘à┘à┘┘â╪ر ╪د┘╪╣╪▒╪ذ┘è╪ر ╪د┘╪│╪╣┘ê╪»┘è╪ر ┘ê╪ث╪│╪╣╪د╪▒┘ç╪د.jpeg'),(62,'Asos','1000$','img/3.jpg'),(63,'Iphone-16','450$','img/Apple iPhone 12, 64GB, Blue (Renewed).jpeg');
+INSERT INTO `prod` VALUES
+(57,'Iphone-16','5000','img/iphone-16.jpeg'),
+(58,'Xiaomi Redmi Note 12','1100','img/xiaomi-redmi-note-12.jpeg'),
+(61,'Iphone-16','500$','img/cdma-phones-saudi.jpeg'),
+(62,'Asos','1000$','img/samsung-galaxy-a55.jpeg'),
+(63,'Iphone-16','450$','img/iphone-12-blue.jpeg'),
+(64,'ASUS ROG','1800','img/asus-rog.jpg'),
+(65,'Dell XPS','1600','img/dell-xps.jpg'),
+(66,'Google Pixel 9','900','img/google-pixel-9.jpg'),
+(67,'HP Spectre','1500','img/hp-spectre.jpg'),
+(68,'iPhone 16 Pro Max','1400','img/iphone-16-pro-max.jpg'),
+(69,'Lenovo ThinkPad','1300','img/lenovo-thinkpad.jpg'),
+(70,'MacBook Pro','2200','img/macbook-pro.jpg'),
+(71,'OnePlus 13','850','img/oneplus-13.jpg'),
+(72,'Samsung Galaxy S25 Ultra','1300','img/samsung-galaxy-s25-ultra.jpg'),
+(73,'Xiaomi Redmi Note 14','400','img/xiaomi-redmi-note-14.jpg');
 /*!40000 ALTER TABLE `prod` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
