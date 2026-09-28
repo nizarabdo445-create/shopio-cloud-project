@@ -80,7 +80,4 @@ networks:
 
 volumes:
   db-data:
-    name: project_db_data
-
   img-data:
-    name: project_img_data
