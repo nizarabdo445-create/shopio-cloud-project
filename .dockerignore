@@ -8,6 +8,3 @@ temp/
 .vscode/
 .idea/
 node_modules/
-Dockerfile
-docker-compose.yml
-compose.yaml
