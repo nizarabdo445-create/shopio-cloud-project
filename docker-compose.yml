@@ -15,7 +15,7 @@ services:
       - app-network
 
   backend:
-    image: nizarabdo/ecommerce-backend:v1.0.0
+    image: nizarabdo/ecommerce-backend:v1.0.1
     container_name: backend_api
     restart: unless-stopped
     depends_on:

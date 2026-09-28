@@ -11,7 +11,7 @@ class JWTHelper {
      * Generate a JWT token for a user
      */
     public static function generateToken(array $payload): string {
-        $secret = $_ENV['JWT_SECRET'] ?? 'default_secret_change_me';
+        $secret = self::getSecret();
         $expiry = (int)($_ENV['JWT_EXPIRY'] ?? 3600);
 
         $header = self::base64UrlEncode(json_encode([
@@ -35,7 +35,7 @@ class JWTHelper {
      * Returns payload array on success, null on failure
      */
     public static function validateToken(string $token): ?array {
-        $secret = $_ENV['JWT_SECRET'] ?? 'default_secret_change_me';
+        $secret = self::getSecret();
 
         $parts = explode('.', $token);
         if (count($parts) !== 3) {
@@ -73,6 +73,7 @@ class JWTHelper {
      */
     public static function extractFromHeader(): ?string {
         $headers = '';
+
         if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $headers = $_SERVER['HTTP_AUTHORIZATION'];
         } elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
@@ -89,11 +90,38 @@ class JWTHelper {
         return null;
     }
 
-    private static function base64UrlEncode(string $data): string {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    /**
+     * Get JWT secret from environment.
+     * Fails securely if JWT_SECRET is missing or too short.
+     */
+    private static function getSecret(): string {
+        $secret = $_ENV['JWT_SECRET'] ?? '';
+
+        if (strlen($secret) < 32) {
+            throw new RuntimeException(
+                'JWT_SECRET must be configured and contain at least 32 characters.'
+            );
+        }
+
+        return $secret;
     }
 
+    /**
+     * Encode data using Base64 URL-safe encoding
+     */
+    private static function base64UrlEncode(string $data): string {
+        return rtrim(
+            strtr(base64_encode($data), '+/', '-_'),
+            '='
+        );
+    }
+
+    /**
+     * Decode Base64 URL-safe encoded data
+     */
     private static function base64UrlDecode(string $data): string {
-        return base64_decode(strtr($data, '-_', '+/'));
+        return base64_decode(
+            strtr($data, '-_', '+/')
+        );
     }
 }
